@@ -1,7 +1,7 @@
-import React from "react";
+import PageComponent from "../components/PageComponent";
 
 function Surveys() {
-  return <div>Surveys</div>;
+  return <PageComponent title="Surveys">Surveys Content</PageComponent>;
 }
 
 export default Surveys;

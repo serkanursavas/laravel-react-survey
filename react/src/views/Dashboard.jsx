@@ -1,7 +1,7 @@
-import React from "react";
+import PageComponent from "../components/PageComponent";
 
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return <PageComponent title="Dashboard">Children</PageComponent>;
 }
 
 export default Dashboard;

@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/outline";
 
 export default function GuestLayout() {
   return (
