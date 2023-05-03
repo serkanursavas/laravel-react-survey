@@ -34,7 +34,13 @@ export default function TButton({
         break
     }
   } else {
-    classes = [...classes, 'text-white', 'focus:ring-2', 'focus:ring-offset-2']
+    classes = [
+      ...classes,
+      'text-white',
+      'focus:ring-2',
+      'focus:ring-offset-2',
+      'items-center',
+    ]
 
     switch (color) {
       case 'indigo':
@@ -58,9 +64,9 @@ export default function TButton({
       case 'green':
         classes = [
           ...classes,
-          'text-emrald-500',
-          'hover:bg-emrald-700',
-          'focus:ring-emrald-400',
+          'bg-emerald-500',
+          'hover:bg-emerald-700',
+          'focus:ring-emerald-400',
         ]
         break
 
