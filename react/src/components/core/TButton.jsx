@@ -1,16 +1,14 @@
 import { Link } from 'react-router-dom'
 
-export default function TButton(
-  { children },
-  {
-    color = 'indigo',
-    to = '',
-    circle = false,
-    href = '',
-    link = false,
-    target = '_blank',
-  }
-) {
+export default function TButton({
+  color = 'indigo',
+  to = '',
+  circle = false,
+  href = '',
+  link = false,
+  target = '_blank',
+  children,
+}) {
   let classes = [
     'flex',
     'whitespace-nowrap',
@@ -42,7 +40,7 @@ export default function TButton(
       case 'indigo':
         classes = [
           ...classes,
-          'text-indigo-600',
+          'bg-indigo-600',
           'hover:bg-indigo-700',
           'focus:ring-indigo-500',
         ]
@@ -51,7 +49,7 @@ export default function TButton(
       case 'red':
         classes = [
           ...classes,
-          'text-red-600',
+          'bg-red-600',
           'hover:bg-red-700',
           'focus:ring-red-500',
         ]

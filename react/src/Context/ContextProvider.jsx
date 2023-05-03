@@ -11,12 +11,13 @@ const StateContext = createContext({
 const tmpSurveys = [
   {
     id: 1,
-    image_url: 'https://api.yoursurveys.xyz/images/vJutXzn02CDwdOyh.png',
-    title: 'TheCodeholic YouTube channel',
-    slug: 'thecodeholic-youtube-channel',
+    image_url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/The_C_Programming_Language_logo.svg/318px-The_C_Programming_Language_logo.svg.png',
+    title: 'C Language',
+    slug: 'c-language',
     status: true,
     description:
-      'My name is Zura.<br>I am Web Developer with 9+ years of experience, free educational content creator, CTO, Lecturer and father of two wonderful daughters.<br><br>The purpose of the channel is to share my several years of experience with beginner developers.<br>Teach them what I know and make my experience as a lesson for others.',
+      'C is a compiled language, which means that the code is translated into machine-readable instructions before being executed. It has a simple syntax, powerful features, and a large library of built-in functions, making it a popular choice for software development in a variety of fields, including systems programming, game development, and scientific computing.',
     created_at: '2022-01-07 13:23:41',
     updated_at: '2022-01-18 16:34:19',
     expire_date: '2022-01-23',
@@ -159,7 +160,8 @@ const tmpSurveys = [
   },
   {
     id: 2,
-    image_url: 'https://api.yoursurveys.xyz/images/gjIHElz4aKrL0nT0.png',
+    image_url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png',
     title: 'React',
     slug: 'react',
     status: true,
@@ -172,7 +174,8 @@ const tmpSurveys = [
   },
   {
     id: 3,
-    image_url: 'https://api.yoursurveys.xyz/images/WPfzo0g66huUYYwR.png',
+    image_url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png',
     title: 'Laravel 9',
     slug: 'laravel-9',
     status: true,

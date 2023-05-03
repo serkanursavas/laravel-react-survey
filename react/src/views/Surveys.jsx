@@ -4,7 +4,6 @@ import SurveyListItem from '../components/SurveyListItem'
 
 function Surveys() {
   const { surveys } = useStateContext()
-  console.log(surveys)
 
   const onDeleteClick = () => {
     console.log('On Delete click')
