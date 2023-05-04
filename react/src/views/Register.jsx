@@ -34,7 +34,6 @@ function Register() {
             (accum, next) => [...next, ...accum],
             []
           )
-          console.log(finalErrors)
           setError({ __html: finalErrors.join('<br>') })
         }
         console.error(error)
