@@ -17,6 +17,7 @@ use App\Http\Controllers\AuthController;
 
 Route::middleware('auth:sanctum')->group(function() {
    Route::post('/logout', [AuthController::class, 'logout']);
+   Route::apiResource('survey', SurveyController::class);
 });
 
 Route::post('/register', [AuthController::class, 'signup']);
