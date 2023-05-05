@@ -78,7 +78,7 @@ export default function SurveyView() {
                   setSurvey({ ...survey, title: ev.target.value })
                 }}
                 placeholder="Survey Title"
-                className="block w-full p-2 mt-1 border-gray-300 rounded-md shadow-sm  focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="block w-full p-2 mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
             {/* Title */}
