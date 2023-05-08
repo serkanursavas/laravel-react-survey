@@ -3,8 +3,12 @@ import PageComponent from '../components/PageComponent'
 import { PhotographIcon } from '@heroicons/react/outline'
 import TButton from '../components/core/TButton'
 import axiosClient from '../axios'
+import { useNavigate } from 'react-router-dom'
+import SurveyQuestion from '../components/SurveyQuestion'
 
 export default function SurveyView() {
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
   const [survey, setSurvey] = useState({
     title: '',
     slug: '',
@@ -16,19 +20,47 @@ export default function SurveyView() {
     questions: [],
   })
 
-  const OnImageChoose = () => {
-    console.log('On Image Choose')
+  const OnImageChoose = (ev) => {
+    const file = ev.target.files[0]
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      setSurvey({
+        ...survey,
+        image: file,
+        image_url: reader.result,
+      })
+
+      ev.target.value = ''
+    }
+    reader.readAsDataURL(file)
   }
 
   const onSubmit = (ev) => {
     ev.preventDefault()
-    axiosClient.post('/survey', {
-      title: 'Lorem Ipsum',
-      description: 'Test',
-      expire_date: '2023-05-06',
-      status: true,
-      questions: [],
-    })
+
+    const payload = { ...survey }
+    if (payload.image) {
+      payload.image = payload.image_url
+    }
+    delete payload.image_url
+
+    axiosClient
+      .post('/survey', payload)
+      .then((res) => {
+        console.log(res)
+        navigate('/surveys')
+      })
+      .catch((err) => {
+        if (err && err.response) {
+          setError(err.response.data.message)
+        }
+        console.log(err, err.response)
+      })
+  }
+
+  const onSurveyUpdate = (survey) => {
+    setSurvey({ ...survey })
   }
 
   return (
@@ -36,6 +68,9 @@ export default function SurveyView() {
       <form action="#" method="POST" onSubmit={onSubmit}>
         <div className="shadow sm:overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 space-y-6 bg-white sm:p-6">
+            {error && (
+              <div className="px-3 py-3 text-white bg-red-500 ">{error}</div>
+            )}
             {/* Image */}
             <div>
               <label className="block text-sm font-medium text-gray-700"></label>
@@ -129,6 +164,10 @@ export default function SurveyView() {
                 }}
                 className="block w-full p-2 mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
+              {/* this section for error handling individual */}
+              {/* <small className="text-red-500">
+                Lorem ipsum dolor sit amet.
+              </small> */}
             </div>
             {/* ExpireDate */}
 
@@ -157,6 +196,8 @@ export default function SurveyView() {
               </div>
             </div>
             {/* Active */}
+
+            <SurveyQuestion survey={survey} onSurveyUpdate={onSurveyUpdate} />
           </div>
           <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
             <TButton>Save</TButton>
