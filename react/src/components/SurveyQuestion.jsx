@@ -3,50 +3,44 @@ import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import QuestionEditor from './QuestionEditor'
 
-export default function SurveyQuestion({ survey, onSurveyUpdate }) {
-  const [model, setModel] = useState({ ...survey })
+export default function SurveyQuestion({ questions, onQuestionsUpdate }) {
+  const [myQuestions, setMyQuestions] = useState([...questions])
 
   const addQuestion = (index) => {
-    index = index !== undefined ? index : model.questions.length - 1
-    model.questions.splice(index, 0, {
+    index = index !== undefined ? index : myQuestions.length - 1
+    myQuestions.splice(index, 0, {
       id: uuidv4(),
       type: 'text',
       question: '',
       description: '',
       data: {},
     })
-
-    setModel({
-      ...model,
-      questions: [...model.questions],
-    })
+    setMyQuestions([...myQuestions])
+    onQuestionsUpdate(myQuestions)
   }
 
   const questionChange = (question) => {
     if (!question) return
-    const newQuestions = model.questions.map((q) => {
+    const newQuestions = myQuestions.map((q) => {
       if (q.id == question.id) {
         return { ...question }
       }
       return q
     })
-    setModel({
-      ...model,
-      questions: newQuestions,
-    })
+    setMyQuestions(newQuestions)
+    onQuestionsUpdate(newQuestions)
   }
 
   const deleteQuestion = (question) => {
-    const newQuestions = model.questions.filter((q) => q.id !== question.id)
-    setModel({
-      ...model,
-      questions: newQuestions,
-    })
+    const newQuestions = myQuestions.filter((q) => q.id !== question.id)
+
+    setMyQuestions(newQuestions)
+    onQuestionsUpdate(newQuestions)
   }
 
-  useEffect(() => {
-    onSurveyUpdate(model)
-  }, [model.questions])
+  // useEffect(() => {
+  //   onQuestionsUpdate(model.question)
+  // }, [model])
 
   return (
     <>
@@ -61,8 +55,8 @@ export default function SurveyQuestion({ survey, onSurveyUpdate }) {
           Add question
         </button>
       </div>
-      {model.questions ? (
-        model.questions.map((q, ind) => (
+      {myQuestions ? (
+        myQuestions.map((q, ind) => (
           <QuestionEditor
             key={q.id}
             index={ind}

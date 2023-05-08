@@ -59,8 +59,8 @@ export default function SurveyView() {
       })
   }
 
-  const onSurveyUpdate = (survey) => {
-    setSurvey({ ...survey })
+  const onQuestionsUpdate = (questions) => {
+    setSurvey({ ...survey, questions })
   }
 
   return (
@@ -197,7 +197,10 @@ export default function SurveyView() {
             </div>
             {/* Active */}
 
-            <SurveyQuestion survey={survey} onSurveyUpdate={onSurveyUpdate} />
+            <SurveyQuestion
+              questions={survey.questions}
+              onQuestionsUpdate={onQuestionsUpdate}
+            />
           </div>
           <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
             <TButton>Save</TButton>
