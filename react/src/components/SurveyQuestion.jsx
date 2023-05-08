@@ -6,19 +6,19 @@ import QuestionEditor from './QuestionEditor'
 export default function SurveyQuestion({ survey, onSurveyUpdate }) {
   const [model, setModel] = useState({ ...survey })
 
-  const addQuestion = () => {
+  const addQuestion = (index) => {
+    index = index !== undefined ? index : model.questions.length - 1
+    model.questions.splice(index, 0, {
+      id: uuidv4(),
+      type: 'text',
+      question: '',
+      description: '',
+      data: {},
+    })
+
     setModel({
       ...model,
-      questions: [
-        ...model.questions,
-        {
-          id: uuidv4(),
-          type: 'text',
-          question: '',
-          description: '',
-          data: {},
-        },
-      ],
+      questions: [...model.questions],
     })
   }
 

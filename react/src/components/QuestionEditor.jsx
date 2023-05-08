@@ -30,7 +30,7 @@ export default function QuestionEditor({
           <button
             type="button"
             className="flex items-center px-3 py-1 mr-3 text-xs text-white bg-gray-600 rounded-sm hover:bg-gray-700"
-            onClick={addQuestion}
+            onClick={() => addQuestion(index + 1)}
           >
             <PlusIcon className="w-4" />
             add

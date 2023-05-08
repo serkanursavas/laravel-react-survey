@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('question', 2000);
             $table->longText('description')->nullable();
             $table->longText('data')->nullable();
-            $table->foreignId(Survey::class, 'survey_id');
+            $table->foreignIdFor(Survey::class, 'survey_id');
             $table->timestamps();
         });
     }

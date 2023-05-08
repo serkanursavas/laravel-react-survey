@@ -191,8 +191,14 @@ class SurveyController extends Controller
         $validator = Validator::make($data, [
             'question' => 'required|string',
             'type' => [
-                'required', new Enum(QuestionTypeEnum::class)
-            ],
+                'required', Rule::in([
+                    'text'
+                    // QuestionTypeEnum::Text->value,
+                    // QuestionTypeEnum::Textarea->value,
+                    // QuestionTypeEnum::Select->value,
+                    // QuestionTypeEnum::Radio->value,
+                    // QuestionTypeEnum::Checkbox->value,
+                    ])],
             'description' => 'nullable|string',
             'data' => 'present',
             'survey_id' => 'exists:App\Models\Survey,id'
