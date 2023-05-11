@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuAlt3Icon, UserIcon, XIcon } from '@heroicons/react/outline'
 import { Outlet, NavLink, Navigate } from 'react-router-dom'
@@ -29,6 +29,12 @@ export default function DefaultLayout() {
       setUserToken(null)
     })
   }
+
+  useEffect(() => {
+    axiosClient.get('/me').then(({ data }) => {
+      setCurrentUser(data)
+    })
+  }, [])
 
   return (
     <>
