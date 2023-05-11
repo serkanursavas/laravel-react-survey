@@ -5,18 +5,23 @@ import SurveyListItem from '../components/SurveyListItem'
 import TButton from '../components/core/TButton'
 import { useEffect, useState } from 'react'
 import axiosClient from '../axios'
+import PaginationLinks from '../components/PaginationLinks'
 
 function Surveys() {
-  // const { surveys } = useStateContext()
   const [surveys, setSurveys] = useState([])
+  const [meta, setMeta] = useState()
+  const [loading, setLoading] = useState(false)
 
   const onDeleteClick = () => {
     console.log('On Delete click')
   }
 
   useEffect(() => {
+    setLoading(true)
     axiosClient.get('/survey').then(({ data }) => {
       setSurveys(data.data)
+      setMeta(data.meta)
+      setLoading(false)
     })
   }, [])
 
@@ -30,17 +35,25 @@ function Surveys() {
         </TButton>
       }
     >
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
-        {surveys.map((survey) => {
-          return (
-            <SurveyListItem
-              survey={survey}
-              key={survey.id}
-              onDeleteClick={onDeleteClick}
-            />
-          )
-        })}
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+            {surveys.map((survey) => {
+              return (
+                <SurveyListItem
+                  survey={survey}
+                  key={survey.id}
+                  onDeleteClick={onDeleteClick}
+                />
+              )
+            })}
+          </div>
+
+          <PaginationLinks meta={meta} />
+        </div>
+      )}
     </PageComponent>
   )
 }
