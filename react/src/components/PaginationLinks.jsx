@@ -1,6 +1,15 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
 
-export default function PaginationLinks({ meta }) {
+export default function PaginationLinks({ meta, onPageClick }) {
+  const onClick = (ev, link) => {
+    ev.preventDefault()
+
+    if (!link.url) {
+      return
+    }
+    onPageClick(link)
+  }
+
   return (
     <div className="flex items-center justify-between px-4 py-3 mt-4 bg-white border-t border-gray-200 shadow-md sm:px-6">
       <div className="flex justify-between flex-1 sm:hidden">
@@ -36,7 +45,7 @@ export default function PaginationLinks({ meta }) {
                 return (
                   <a
                     key={ind}
-                    href="#"
+                    onClick={(ev) => onClick(ev, link)}
                     aria-current="page"
                     className={
                       'relative z-10 inline-flex items-center shadow-md border px-4 py-2 text-sm font-medium focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-gray-50 ' +

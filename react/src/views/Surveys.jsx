@@ -16,13 +16,22 @@ function Surveys() {
     console.log('On Delete click')
   }
 
-  useEffect(() => {
+  const onPageClick = (link) => {
+    getSurveys(link.url)
+  }
+
+  const getSurveys = (url) => {
+    url = url || '/survey'
     setLoading(true)
-    axiosClient.get('/survey').then(({ data }) => {
+    axiosClient.get(url).then(({ data }) => {
       setSurveys(data.data)
       setMeta(data.meta)
       setLoading(false)
     })
+  }
+
+  useEffect(() => {
+    getSurveys()
   }, [])
 
   return (
@@ -51,7 +60,7 @@ function Surveys() {
             })}
           </div>
 
-          <PaginationLinks meta={meta} />
+          <PaginationLinks meta={meta} onPageClick={onPageClick} />
         </div>
       )}
     </PageComponent>
