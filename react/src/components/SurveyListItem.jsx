@@ -7,16 +7,16 @@ const SurveyListItem = ({ survey, onDeleteClick }) => {
       <img
         src={survey.image_url}
         alt={survey.title}
-        className="w-full h-48 object-cover"
+        className="object-cover w-full h-48"
       />
       <h4 className="mt-4 text-lg font-bold">{survey.title}</h4>
       <div
         dangerouslySetInnerHTML={{ __html: survey.description }}
-        className="overflow-hidden flex-1"
+        className="flex-1 overflow-hidden"
       ></div>
 
-      <div className="flex justify-between items-center mt-3">
-        <TButton to={`surveys/${survey.id}`}>
+      <div className="flex items-center justify-between mt-3">
+        <TButton to={`/surveys/${survey.id}`}>
           <PencilIcon className="w-5 h-5 mr-2" />
           Edit
         </TButton>

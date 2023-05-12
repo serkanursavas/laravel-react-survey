@@ -20,6 +20,7 @@ const router = createBrowserRouter([
       { path: '/', element: <Dashboard /> },
       { path: '/surveys', element: <Surveys /> },
       { path: '/surveys/create', element: <SurveyView /> },
+      { path: '/surveys/:id', element: <SurveyView /> },
     ],
   },
   {

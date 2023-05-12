@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class UpdateSurveyRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class UpdateSurveyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'reqiured|string|max:1000',
+            'title' => 'required|string|max:1000',
             'image' => 'string', 
             'user_id' => 'exists:user,id',
             'status' => 'required|boolean',
