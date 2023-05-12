@@ -6,7 +6,8 @@ export default function TButton({
   circle = false,
   href = '',
   link = false,
-  target = '_blank',
+  target = '_self',
+  onClick = () => {},
   children,
 }) {
   let classes = [

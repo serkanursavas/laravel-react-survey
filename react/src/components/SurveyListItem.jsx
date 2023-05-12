@@ -25,8 +25,10 @@ const SurveyListItem = ({ survey, onDeleteClick }) => {
             <ShareIcon className="w-5 h-5 " />
           </TButton>
           {survey.id && (
-            <TButton onClick={onDeleteClick} circle link color="red">
-              <TrashIcon className="w-5 h-5" />
+            <TButton circle link color="red">
+              <button onClick={() => onDeleteClick(survey.id)}>
+                <TrashIcon className="w-5 h-5" />
+              </button>
             </TButton>
           )}
         </div>
