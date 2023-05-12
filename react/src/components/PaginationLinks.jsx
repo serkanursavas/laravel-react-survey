@@ -14,16 +14,16 @@ export default function PaginationLinks({ meta, onPageClick }) {
     <div className="flex items-center justify-between px-4 py-3 mt-4 bg-white border-t border-gray-200 shadow-md sm:px-6">
       <div className="flex justify-between flex-1 sm:hidden">
         <a
-          href="#"
+          onClick={(ev) => onClick(ev, meta.links[0])}
           className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
         >
           Previous
         </a>
         <a
-          href="#"
+          onClick={(ev) => onClick(ev, meta.links[meta.links.length - 1])}
           className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
         >
-          Next
+          Nextt
         </a>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
