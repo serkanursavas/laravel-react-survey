@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useStateContext } from '../Context/ContextProvider'
 import { PlusIcon, TrashIcon } from '@heroicons/react/outline'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function QuestionEditor({
   index = 0,
@@ -18,6 +19,41 @@ export default function QuestionEditor({
 
   function upperCaseFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
+  function shouldHaveOptions(type = null) {
+    type = type || model.type
+    return ['select', 'radio', 'checkbox'].includes(type)
+  }
+
+  function onTypeChange(ev) {
+    const newModel = {
+      ...model,
+      type: ev.target.value,
+    }
+    if (!shouldHaveOptions(model.type) && shouldHaveOptions(ev.target.value)) {
+      if (!model.data.options) {
+        newModel.data = {
+          options: [{ uuid: uuidv4(), text: '' }],
+        }
+      }
+    }
+    setModel(newModel)
+  }
+
+  const addOption = () => {
+    model.data.options.push({
+      uuid: uuidv4(),
+      text: '',
+    })
+    setModel({ ...model })
+  }
+
+  function deleteOption(op) {
+    model.data.options = model.data.options.filter(
+      (option) => option.uuid != op.uuid
+    )
+    setModel({ ...model })
   }
 
   return (
@@ -77,7 +113,7 @@ export default function QuestionEditor({
             id="questionType"
             name="questionType"
             value={model.type}
-            onChange={(ev) => setModel({ ...model, type: ev.target.value })}
+            onChange={onTypeChange}
             className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           >
             {questionTypes.map((type) => (
@@ -90,6 +126,56 @@ export default function QuestionEditor({
         {/* Question Type */}
       </div>
 
+      <div>
+        {shouldHaveOptions() && (
+          <div>
+            <h4 className="flex items-center justify-between mb-1 text-sm font-semibold">
+              Options
+              <button
+                type="button"
+                className="flex items-center px-2 py-1 text-xs text-white bg-gray-600 roundded-sm hover:bg-gray-700"
+                onClick={addOption}
+              >
+                Add
+              </button>
+            </h4>
+            {model.data.options && model.data.options.length === 0 && (
+              <div className="py-3 text-xs text-center text-gray-600">
+                You dont have any options defined
+              </div>
+            )}
+            {model.data.options && model.data.options.length >= 1 && (
+              <div>
+                {model.data.options.map((op, ind) => {
+                  return (
+                    <div key={ind} className="flex items-center mb-1 ">
+                      <span className="w-6 text-sm">{ind + 1}.</span>
+                      <input
+                        className="w-full px-2 py-1 text-xs border border-gray-300 rounded-sm focus:border-indigo-500"
+                        type="text"
+                        value={op.text}
+                        onChange={(ev) => {
+                          op.text = ev.target.value
+                          setModel({ ...model })
+                        }}
+                      />
+                      <button
+                        onClick={(ev) => deleteOption(op)}
+                        type="button"
+                        className="flex items-center justify-center w-6 h-6 transition-colors border border-transparent rounded-full hover:border-red-100"
+                      >
+                        <TrashIcon className="w-3 h-3 text-red-500" />
+                      </button>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      {model.type === 'select' && <div></div>}
+
       {/*Description*/}
       <div className="mb-3">
         <label
@@ -101,7 +187,7 @@ export default function QuestionEditor({
         <textarea
           name="questionDescription"
           id="questionDescription"
-          value={model.description || ''}
+          value={'' || model.description}
           onChange={(ev) =>
             setModel({ ...model, description: ev.target.value })
           }
