@@ -207,7 +207,7 @@ export const ContextProvider = ({ children }) => {
     'textarea',
   ])
 
-  const [toast, setToast] = useState({ message: '', show: true })
+  const [toast, setToast] = useState({ message: null, show: false })
 
   const setUserToken = (token) => {
     if (token) {
@@ -221,7 +221,7 @@ export const ContextProvider = ({ children }) => {
   const showToast = (message) => {
     setToast({ message, show: true })
     setTimeout(() => {
-      setToast({ message: '', show: false })
+      setToast({ message: null, show: false })
     }, 5000)
   }
 
