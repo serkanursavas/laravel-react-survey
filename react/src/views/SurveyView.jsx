@@ -5,8 +5,10 @@ import TButton from '../components/core/TButton'
 import axiosClient from '../axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import SurveyQuestion from '../components/SurveyQuestion'
+import { useStateContext } from '../Context/ContextProvider'
 
 export default function SurveyView() {
+  const { showToast } = useStateContext()
   const [error, setError] = useState('')
   const navigate = useNavigate()
   const { id } = useParams()
@@ -55,9 +57,13 @@ export default function SurveyView() {
     }
 
     res
-      .then((res) => {
-        console.log(res)
+      .then(() => {
         navigate('/surveys')
+        if (id) {
+          showToast('Survey was updated succesfully')
+        } else {
+          showToast('Survey was created succesfully')
+        }
       })
       .catch((err) => {
         if (err && err.response) {

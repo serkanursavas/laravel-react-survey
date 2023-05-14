@@ -4,6 +4,7 @@ import { MenuAlt3Icon, UserIcon, XIcon } from '@heroicons/react/outline'
 import { Outlet, NavLink, Navigate } from 'react-router-dom'
 import { useStateContext } from '../Context/ContextProvider'
 import axiosClient from '../axios'
+import Toast from './Toast'
 
 const navigation = [
   { name: 'Dashboard', to: '/dashboard' },
@@ -176,6 +177,8 @@ export default function DefaultLayout() {
         </Disclosure>
 
         <Outlet />
+
+        <Toast />
       </div>
     </>
   )

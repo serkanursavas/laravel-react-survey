@@ -9,6 +9,7 @@ import PaginationLinks from '../components/PaginationLinks'
 import router from '../router'
 
 function Surveys() {
+  const { showToast } = useStateContext()
   const [surveys, setSurveys] = useState([])
   const [meta, setMeta] = useState()
   const [loading, setLoading] = useState(false)
@@ -17,6 +18,7 @@ function Surveys() {
     if (window.confirm('Are you sure you want to delete this survey?')) {
       axiosClient.delete(`/survey/${id}`).then(() => {
         getSurveys()
+        showToast('The survey was deleted')
       })
     }
   }
@@ -53,6 +55,11 @@ function Surveys() {
         <div>Loading...</div>
       ) : (
         <div>
+          {surveys.length === 0 && (
+            <div className="py-8 text-center text-gray-700">
+              You dont have surveys created
+            </div>
+          )}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
             {surveys.map((survey) => {
               return (
