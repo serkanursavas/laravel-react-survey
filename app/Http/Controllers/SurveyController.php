@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Survey;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -216,7 +217,20 @@ class SurveyController extends Controller
         return $question->update($validator->validated());
     }
 
-    public function getBySlug(Survey $survey){
-        return $survey;
+    public function getBySlug(Survey $survey)
+    {
+        if (!$survey->status) {
+            return response("", 404);
+        }
+
+        $currentDate = new \DateTime();
+        $expireDate = new \DateTime($survey->expire_date);
+        if ($currentDate > $expireDate) {
+            return response("", 404);
+        }
+
+        return new SurveyResource($survey);
+
     }
+
 }

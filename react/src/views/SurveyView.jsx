@@ -176,6 +176,7 @@ export default function SurveyView() {
                 >
                   Description
                 </label>
+                {console.log(survey)}
                 <textarea
                   name="description"
                   id="description"
