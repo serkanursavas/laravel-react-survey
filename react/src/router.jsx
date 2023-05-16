@@ -7,6 +7,7 @@ import Surveys from './views/Surveys'
 import GuestLayout from './components/GuestLayout'
 import DefaultLayout from './components/DefaultLayout'
 import SurveyView from './views/SurveyView'
+import SurveyPublicView from './views/SurveyPublicView'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: '/register', element: <Register /> },
     ],
   },
+  { path: '/surveys/public/:slug', element: <SurveyPublicView /> },
 ])
 
 export default router
