@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Survey;
 use App\Models\SurveyAnswer;
 use Illuminate\Http\Request;
+use App\Http\Resources\SurveyAnswerResource;
 use App\Http\Resources\SurveyResourceDashboard;
 
 class DashboardController extends Controller

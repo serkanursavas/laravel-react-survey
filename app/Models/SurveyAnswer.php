@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Survey;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SurveyAnswer extends Model
 {
@@ -13,4 +14,9 @@ class SurveyAnswer extends Model
     const CREATED_AT = null;
 
     protected $fillable = ['survey_id', 'start_date', 'end_date'];
+
+    public function belongsTo()
+    {
+        return $this->belongsTo(Survey::class);
+    }
 }
