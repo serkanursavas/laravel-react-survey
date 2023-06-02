@@ -39,7 +39,6 @@ export default function SurveyPublicView() {
         answers,
       })
       .then((response) => {
-        debugger
         setSurveyFinished(true)
       })
   }

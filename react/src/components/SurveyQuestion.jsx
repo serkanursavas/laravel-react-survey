@@ -38,10 +38,6 @@ export default function SurveyQuestion({ questions, onQuestionsUpdate }) {
     onQuestionsUpdate(newQuestions)
   }
 
-  // useEffect(() => {
-  //   onQuestionsUpdate(model.question)
-  // }, [model])
-
   return (
     <>
       <div className="flex justify-between">

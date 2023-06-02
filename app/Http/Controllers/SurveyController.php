@@ -236,7 +236,8 @@ class SurveyController extends Controller
 
     }
 
-    public function storeAnswer(StoreSurveyAnswerRequest $request, Survey $survey){
+    public function storeAnswer(StoreSurveyAnswerRequest $request, Survey $survey)
+    {
 
         $validated = $request->validated();
 

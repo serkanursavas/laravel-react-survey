@@ -77,7 +77,13 @@ export default function SurveyView() {
     setSurvey({ ...survey, questions })
   }
 
-  const onDelete = () => {}
+  const onDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this survey?')) {
+      axiosClient.delete(`/survey/${id}`).then(() => {
+        showToast('The survey was deleted')
+      })
+    }
+  }
 
   useEffect(() => {
     if (id) {
@@ -98,7 +104,12 @@ export default function SurveyView() {
             <LinkIcon className="w-4 h-4 mr-2" />
             Public Link
           </TButton>
-          <TButton color="red" onClick={onDelete}>
+          <TButton
+            color="red"
+            onClick={() => {
+              onDelete(survey.id)
+            }}
+          >
             <TrashIcon className="w-6 h-6 mr-2" />
             Delete
           </TButton>
@@ -176,7 +187,6 @@ export default function SurveyView() {
                 >
                   Description
                 </label>
-                {console.log(survey)}
                 <textarea
                   name="description"
                   id="description"
