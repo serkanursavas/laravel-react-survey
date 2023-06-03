@@ -32,7 +32,7 @@ function Dashboard() {
           <DashboardCard
             title="Total Surveys"
             className="order-1 lg:order-2"
-            style="animaton-delay: 0.1s"
+            style={{ animationDelay: '0.1s' }}
           >
             <div className="flex items-center justify-center flex-1 pb-4 font-semibold text-8xl">
               {data.totalSurveys}
@@ -42,7 +42,7 @@ function Dashboard() {
           <DashboardCard
             title="Total Answers"
             className="order-2 lg:order-4"
-            style="animaton-delay: 0.2s"
+            style={{ animationDelay: '0.2s' }}
           >
             <div className="flex items-center justify-center flex-1 pb-4 font-semibold text-8xl">
               {data.totalAnswers}
@@ -52,7 +52,7 @@ function Dashboard() {
           <DashboardCard
             title="Latest Survey"
             className="order-3 row-span-2 lg:order-1"
-            style="animaton-delay: 0.2s"
+            style={{ animationDelay: '0.2s' }}
           >
             {data.latestSurvey && (
               <div>
@@ -104,9 +104,9 @@ function Dashboard() {
           </DashboardCard>
 
           <DashboardCard
-            title="Latest Answer"
-            className="order-4 row-span-3 lg:order-3"
-            style="animaton-delay: 0.3s"
+            title="Latest Answers"
+            className="order-4 row-span-2 lg:order-3"
+            style={{ animationDelay: '0.3s' }}
           >
             {data.latestAnswers && data.latestAnswers.length && (
               <div className="text-left">
